@@ -18,7 +18,7 @@ angular.module('IonicEvtrs')
         });
     })
 
-    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleService) {
+    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleService, CameraService) {
         $scope.tinymceOptions = {
             theme: 'modern',
             plugins: [
@@ -28,21 +28,33 @@ angular.module('IonicEvtrs')
                 'emoticons template paste textcolor'
             ],
             menubar: false,
-            toolbar: 'bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-            statusbar: false
-        };
+            toolbar: 'bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent insertpicture',
+            setup: function (editor) {
 
+                editor.addButton('insertpicture', {
+                    title: 'Insert Picture',
+                    label: 'lable',
+                    image: '/images/camera.png',
+                    onclick: function () {
+                        console.log('Getting camera');
+
+                        CameraService.getPicture().then(function (imageData) {
+                            editor.focus();
+                            editor.execCommand('insertHTML', false, '<img src="data:image/gif;base64,' + imageData + ' "width="300" height="500">');
+                          //  editor.execCommand('insertHTML', false, '<img src=' + imageData + ' "width="300" height="500">');
+                        });
+                    }
+                });
+            },
+            statusbar: false
+            //convert_urls : false
+        };
 
         $scope.initialize = function () {
             $scope.article = {};
             $scope.saveAction = 'Save';
             $scope.submitted = false;
         };
-
-        $scope.insertImage = function () {
-            var content = tinyMCE.activeEditor.getContent();
-            tinyMCE.activeEditor.setContent(content + 'image to insert');
-        }
 
         $scope.initialize();
 

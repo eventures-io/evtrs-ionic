@@ -558,7 +558,7 @@ module.exports = function (grunt) {
     grunt.registerTask('deploy', function () {
         return grunt.task.run(['build', 'exec:deployAndroid']);
     });
-    
+
     grunt.registerTask('init', [
         'clean',
         'ngconstant:development',
