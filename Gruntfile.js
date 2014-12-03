@@ -23,7 +23,8 @@ module.exports = function (grunt) {
             app: 'app',
             scripts: 'scripts',
             styles: 'styles',
-            images: 'images'
+            images: 'images',
+            android: 'platforms/android'
         },
 
         // Environment Variables for Angular App
@@ -345,6 +346,13 @@ module.exports = function (grunt) {
                 'copy:fonts'
             ]
         },
+        exec: {
+            deployAndroid: {
+                command: 'adb install -r <%= yeoman.android%>/ant-build/IonicEvtrs-debug.apk',
+                stdout: true,
+                stderr: true
+            }
+        },
 
         // By default, your `index.html`'s <!-- Usemin block --> will take care of
         // minification. These next options are pre-configured if you do not wish
@@ -543,6 +551,14 @@ module.exports = function (grunt) {
         return grunt.task.run(['init', 'ionic:build:' + this.args.join()]);
     });
 
+    grunt.registerTask('build', function () {
+        return grunt.task.run(['init', 'ionic:build:' + this.args.join()]);
+    });
+
+    grunt.registerTask('deploy', function () {
+        return grunt.task.run(['build', 'exec:deployAndroid']);
+    });
+    
     grunt.registerTask('init', [
         'clean',
         'ngconstant:development',

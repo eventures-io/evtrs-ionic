@@ -17,7 +17,7 @@ angular.module('IonicEvtrs')
         return articles.put(article);
     };
 
-    var getRecent = function (){
+    var recent = function (){
         return articles.customGETLIST('query/recent');
     };
 
@@ -25,6 +25,6 @@ angular.module('IonicEvtrs')
         getById : getById,
         save : save,
         update : update,
-        getRecent : getRecent
+        recent : recent
     };
 });

@@ -19,6 +19,7 @@
     "grunt-contrib-jshint": "~0.7.1",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-watch": "~0.5.2",
+    "grunt-exec": "^0.4.6",
     "grunt-injector": "^0.6.0",
     "grunt-karma": "~0.8.0",
     "grunt-newer": "~0.6.1",
@@ -58,6 +59,8 @@
     "org.apache.cordova.geolocation",
     "org.apache.cordova.dialogs",
     "org.apache.cordova.vibration",
-    "org.apache.cordova.contacts"
+    "org.apache.cordova.contacts",
+    "org.apache.cordova.camera",
+    "https://github.com/jsHybugger/cordova-plugin-jshybugger.git"
   ]
 }

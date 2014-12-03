@@ -1,33 +1,21 @@
 'use strict';
 angular.module('IonicEvtrs')
-
-    .filter('HtmlFilter', ['$sce', function ($sce) {
-        return function (text) {
-            return $sce.trustAsHtml(text);
-        };
-    }]);
-
-
-angular.module('IonicEvtrs')
-
-    .factory('ArticleService', function(Restangular) {
-
-        var articles = Restangular.all('articles');
+    .factory('ArticleService', function(ArticleResource) {
 
         var getById = function (articleId) {
-            return articles.one(articleId).get();
+            return ArticleResource.getById(articleId);
         };
 
         var save = function (article) {
-            return articles.post(article);
+            return ArticleResource.save(article);
         };
 
         var update = function (article) {
-            return articles.put(article);
+            return ArticleResource.update(article);
         };
 
         var getRecent = function (){
-            return articles.customGETLIST('query/recent');
+            return ArticleResource.recent();
         };
 
         return {

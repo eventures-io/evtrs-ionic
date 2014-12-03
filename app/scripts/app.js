@@ -6,7 +6,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('IonicEvtrs', ['ionic', 'config', 'restangular'])
+angular.module('IonicEvtrs', ['ionic', 'config', 'restangular', 'ui.tinymce'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -53,17 +53,17 @@ angular.module('IonicEvtrs', ['ionic', 'config', 'restangular'])
       url: '/article/:articleId',
       views: {
         'tab-articles': {
-          templateUrl: 'templates/article-detail.html',
+          templateUrl: 'templates/tab-detail.html',
           controller: 'ArticleDetailCtrl'
         }
       }
     })
-    .state('tab.account', {
-      url: '/account',
+    .state('tab.edit', {
+      url: '/edit',
       views: {
-        'tab-account': {
-          templateUrl: 'templates/tab-account.html',
-          controller: 'AccountCtrl'
+        'tab-edit': {
+          templateUrl: 'templates/tab-edit.html',
+          controller: 'ArticleEditCtrl'
         }
       }
     });
