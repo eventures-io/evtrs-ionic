@@ -22,36 +22,38 @@ angular.module('IonicEvtrs')
         $scope.tinymceOptions = {
             theme: 'modern',
             plugins: [
-                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                'searchreplace wordcount visualblocks visualchars code fullscreen',
-                'insertdatetime media nonbreaking save table contextmenu directionality',
-                'emoticons template paste textcolor'
+//                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+//                'searchreplace wordcount visualblocks visualchars code fullscreen',
+//                'insertdatetime media nonbreaking save table contextmenu directionality',
+//                'emoticons template paste textcolor'
             ],
             menubar: false,
             toolbar: 'bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent insertpicture',
-            setup: function (editor) {
-
-                editor.addButton('insertpicture', {
-                    title: 'Insert Picture',
-                    label: 'lable',
-                    image: '/images/camera.png',
-                    onclick: function () {
-                        console.log('Getting camera');
-
-                        CameraService.getPicture().then(function (imageData) {
-                            editor.focus();
-                            editor.execCommand('insertHTML', false, '<img src="data:image/gif;base64,' + imageData + ' "width="300" height="500">');
-                          //  editor.execCommand('insertHTML', false, '<img src=' + imageData + ' "width="300" height="500">');
-                        });
-                    }
-                });
-            },
+//            setup: function (editor) {
+//
+//                editor.addButton('insertpicture', {
+//                    title: 'Insert Picture',
+//                    label: 'lable',
+//                    image: '/images/camera.png',
+//                    onclick: function () {
+//                        console.log('Getting camera');
+//
+//                        CameraService.getPicture().then(function (imageData) {
+//                            editor.focus();
+//                            editor.execCommand('insertHTML', false, '<img src="data:image/gif;base64,' + imageData + ' "width="300" height="500">');
+//                          //  editor.execCommand('insertHTML', false, '<img src=' + imageData + ' "width="300" height="500">');
+//                        });
+//                    }
+//                });
+//            },
             statusbar: false
             //convert_urls : false
+            //entity_encoding : "raw"
         };
 
         $scope.initialize = function () {
             $scope.article = {};
+            $scope.article.content = 'Init';
             $scope.saveAction = 'Save';
             $scope.submitted = false;
         };
@@ -78,10 +80,33 @@ angular.module('IonicEvtrs')
         };
     })
 
-    .controller('AccountCtrl', function ($scope) {
-        $scope.jshint = '';
-    });
+    .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
+        $scope.user = {};
+        $scope.errors = {};
 
+        $scope.login = function(form) {
+            $scope.submitted = true;
+
+            if(form.$valid) {
+                Auth.login({
+                    email: $scope.user.email,
+                    password: $scope.user.password
+                })
+                    .then( function() {
+                        // Logged in, redirect to home
+                        $location.path('/');
+                    })
+                    .catch( function(err) {
+                        $scope.errors.other = err.message;
+                    });
+            }
+        };
+
+        $scope.loginOauth = function(provider) {
+            $window.location.href = '/auth/' + provider;
+        };
+
+    });
 
 
 

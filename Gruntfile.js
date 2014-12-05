@@ -42,7 +42,7 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: {
                         name: 'development',
-                        apiEndpoint: 'https://eventures-scroll.herokuapp.com/api/'
+                        apiEndpoint: 'https://eventures-scroll.herokuapp.com'
                     }
                 }
             },
@@ -50,7 +50,7 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: {
                         name: 'production',
-                        apiEndpoint: 'https://eventures-scroll.herokuapp.com/api/'
+                        apiEndpoint: 'https://eventures-scroll.herokuapp.com'
                     }
                 }
             }

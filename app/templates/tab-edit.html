@@ -1,18 +1,17 @@
 <ion-view title="Edit">
     <ion-content has-header="true" padding="true">
 
-<form class="form" name="form" ng-submit="save(form)" novalidate>
-    <div class="form-group has-feedback" ng-class="{'has-error': form.title.$invalid && submitted }">
-        <label class="control-label" for="title">Title</label>
-        <input type="text" class="input-title" id="title" name="title" ng-model="article.title" required/>
+        <form class="form" name="form" ng-submit="save(form)" novalidate>
+            <div class="form-group has-feedback" ng-class="{'has-error': form.title.$invalid && submitted }">
+                <label class="control-label" for="title">Title</label>
+                <input type="text" class="input-title" id="title" name="title" ng-model="article.title" required/>
 
-        <div class="form-group">
-            <textarea ui-tinymce="tinymceOptions" ng-model="article.content"></textarea>
-        </div>
-        <button class="form-btn pull-right" type="submit">{{saveAction}}</button>
-        <button class="form-btn pull-right" ng-click="initialize()" type="button">Reset</button>
-    </div>
-</form>
-
+                <div class="form-group">
+                    <textarea ui-tinymce="tinymceOptions" ng-model="article.content"></textarea>
+                </div>
+                <button class="form-btn pull-right" type="submit">{{saveAction}}</button>
+                <button class="form-btn pull-right" ng-click="initialize()" type="button">Reset</button>
+            </div>
+        </form>
     </ion-content>
 </ion-view>
