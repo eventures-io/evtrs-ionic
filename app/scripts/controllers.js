@@ -19,33 +19,14 @@ angular.module('IonicEvtrs')
 
     .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleService, CameraService, GeoService, $http, $window) {
         $scope.tinymceOptions = {
-//                   setup: function (editor) {
-//                editor.addButton('insertpicture', {
-//                    title: 'Insert Picture',
-//                    label: 'lable',
-//                    image: '/images/camera.png',
-//                    onclick: function () {
-//                        console.log('Getting camera');
-//                        CameraService.getPicture().then(function (imageData) {
-//                            editor.focus();
-//                            editor.execCommand('insertHTML', false, '<img src="data:image/gif;base64,' + imageData + ' "width="300" height="500">');
-//                          //  editor.execCommand('insertHTML', false, '<img src=' + imageData + ' "width="300" height="500">');
-//                        });
-//                    }
-//                });
- //                    },
             theme: 'modern',
             plugins: [
-//                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-//                'searchreplace wordcount visualblocks visualchars code fullscreen',
-//                'insertdatetime media nonbreaking save table contextmenu directionality',
-//                'emoticons template paste textcolor'
+                'insertdatetime directionality'
             ],
             menubar: false,
-            toolbar: 'bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent insertpicture',
-            statusbar: false
-            //convert_urls : false
-            //entity_encoding : "raw"
+            toolbar: 'bold italic bullist numlist outdent indent',
+            statusbar: false,
+            height:600
         };
 
         $scope.initialize = function () {
@@ -56,6 +37,15 @@ angular.module('IonicEvtrs')
         };
 
         $scope.initialize();
+        $scope.insertPicture = function () {
+            console.log('Getting camera');
+            CameraService.getPicture().then(function (imageData) {
+
+                tinymce.activeEditor.focus();
+                                                                                                                  //todo get viewport dimensions
+                tinymce.activeEditor.execCommand('insertHTML', false, '<img src="data:image/gif;base64,' + imageData + ' "width="300" height="500">');
+            });
+        }
 
         $scope.save = function (form) {
 
@@ -66,14 +56,13 @@ angular.module('IonicEvtrs')
             if (form.$valid) {
                 if ($scope.saveAction === 'Save') {
                     $scope.article.publDate = new Date();
-                    GeoService.getCurrentPosition().then(function(finderyLocation) {
-                       location = finderyLocation;
+                    GeoService.getCurrentPosition().then(function (finderyLocation) {
+                        location = finderyLocation;
 
                     });
 
-//                    var oauthRedirectURL;
+                    var oauthRedirectURL;
 //                    // Trying to calculate oauthRedirectURL based on the current URL.
-//
 //                    var index = document.location.href.indexOf('index.html');
 //                    alert('current url : ' + document.location.href);
 ////                    if (index > 0) {
@@ -82,60 +71,62 @@ angular.module('IonicEvtrs')
 ////                        return alert("Can't reliably infer the OAuth redirect URI. Please specify it explicitly in openFB.init()");
 ////                    }
 
-                    var postAuthRequest = function(code) {
+                    var postAuthRequest = function (code) {
                         $http.post('https://findery.com/oauth/access_token', {
                             grant_type: 'authorization_code',
-                            code :  code,
-                            client_id : client_id,
-                            client_secret : client_secret
+                            code: code,
+                            client_id: client_id,
+                            client_secret: client_secret
                         }).
-                            success(function(data) {
-                                $window.localStorage.finderyToken =  data.access_token;
+                            success(function (data) {
+                                $window.localStorage.finderyToken = data.access_token;
                                 postToFindery(data.access_token);
                             }).
-                            error(function(err) {
+                            error(function (err) {
                                 console.log(err);
                             });
                     }
 
-                    var postToFindery = function(access_token) {
+                    var postToFindery = function (access_token) {
 
                         $http.post('https://api.findery.com/v2/notes', {
                             access_token: access_token,
-                            title : $scope.article.title ,
-                            message : $scope.article.content,
-                            visibility : 'self',
+                            title: $scope.article.title,
+                            message: $scope.article.content,
+                            visibility: 'self',
                             location: location
                         }).
-                            success(function(data) {
+                            success(function (data) {
                                 alert('findery post success');
                             }).
-                            error(function(err) {
+                            error(function (err) {
                                 console.log(err);
                             });
                     }
 
 
-                 if(!$window.localStorage.finderyToken) {
+                    if (!$window.localStorage.finderyToken) {
 
-                    var login_url = 'https://findery.com/oauth/authorize?client_id=' + client_id + '&response_type=code&redirect_url=' + oauthRedirectURL + 'l&scope=notes contacts delete';
-                    var loginWindow = window.open(login_url, '_blank', 'location=yes');
+                        var login_url = 'https://findery.com/oauth/authorize?client_id=' +
+                            client_id +
+                            '&response_type=code&redirect_url=' +
+                            oauthRedirectURL +
+                            'l&scope=notes contacts delete';
+                        var loginWindow = window.open(login_url, '_blank', 'location=yes');
 
-                    loginWindow.addEventListener('loadstart', function (event) {
-                        var url = event.url;
-                        if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
-                            loginWindow.close();
-                            var code = url.split("code=")[1];
-                            postAuthRequest(code);
-                        }
-                    });
+                        loginWindow.addEventListener('loadstart', function (event) {
+                            var url = event.url;
+                            if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
+                                loginWindow.close();
+                                var code = url.split("code=")[1];
+                                postAuthRequest(code);
+                            }
+                        });
 
 
-                 } else {
-                     postToFindery($window.localStorage.finderyToken);
-                 }
-
-
+                    } else {
+                        postToFindery($window.localStorage.finderyToken);
+                    }
                     ArticleService.save($scope.article)
                         .then(function (data) {
                             $scope.article = data;
@@ -155,26 +146,26 @@ angular.module('IonicEvtrs')
         $scope.user = {};
         $scope.errors = {};
 
-        $scope.login = function(form) {
+        $scope.login = function (form) {
             $scope.submitted = true;
 
-            if(form.$valid) {
+            if (form.$valid) {
                 Auth.login({
                     email: $scope.user.email,
                     password: $scope.user.password
                 })
-                    .then( function() {
+                    .then(function () {
                         // Logged in, redirect to home
                         //TODO replay latest request if redirected to login from protected url
                         $location.path('/');
                     })
-                    .catch( function(err) {
+                    .catch(function (err) {
                         $scope.errors.other = err.message;
                     });
             }
         };
 
-        $scope.loginOauth = function(provider) {
+        $scope.loginOauth = function (provider) {
             $window.location.href = '/auth/' + provider;
         };
 

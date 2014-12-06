@@ -1,9 +1,13 @@
 <ion-view title="Edit">
     <ion-content has-header="true" padding="true">
-
+    <div class="toolbar">
+        <span class="camera-btn" ng-click="insertPicture()"></span>
+    </div>
         <form class="form" name="form" ng-submit="save(form)" novalidate>
             <div class="form-group has-feedback" ng-class="{'has-error': form.title.$invalid && submitted }">
                 <label class="control-label" for="title">Title</label>
+
+                <div class="thumbnail-container" ng-show="includePictures"></div>
                 <input type="text" class="input-title" id="title" name="title" ng-model="article.title" required/>
 
                 <div class="form-group">
