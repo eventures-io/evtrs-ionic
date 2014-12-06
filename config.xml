@@ -8,5 +8,6 @@
         Apache Cordova Team
     </author>
     <content src="index.html" />
-    <access origin="*" />
+    <!--<access origin="*" />-->
+    <access origin="https://findery.com" />
 </widget>

@@ -61,6 +61,7 @@
     "org.apache.cordova.vibration",
     "org.apache.cordova.contacts",
     "org.apache.cordova.camera",
-    "https://github.com/jsHybugger/cordova-plugin-jshybugger.git"
+    "https://github.com/jsHybugger/cordova-plugin-jshybugger.git",
+    "org.apache.cordova.inappbrowser"
   ]
 }

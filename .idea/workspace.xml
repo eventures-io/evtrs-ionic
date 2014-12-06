@@ -29,16 +29,7 @@
       <file leaf-file-name="controllers.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/scripts/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="0" selection-start="3150" selection-end="3150" vertical-scroll-proportion="0.55335367" vertical-offset="777" max-vertical-offset="1845">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="camera-service.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/scripts/camera-service.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="12" selection-start="553" selection-end="570" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+            <state line="133" column="25" selection-start="5976" selection-end="5976" vertical-scroll-proportion="0.8382126" vertical-offset="1451" max-vertical-offset="2850">
               <folding />
             </state>
           </provider>
@@ -47,16 +38,43 @@
       <file leaf-file-name="geo-service.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/scripts/geo-service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="49" selection-start="568" selection-end="583" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
+            <state line="17" column="38" selection-start="648" selection-end="648" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tab-detail.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/tab-detail.html">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="0" selection-start="187" selection-end="187" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="210">
+            <state line="54" column="36" selection-start="2091" selection-end="2091" vertical-scroll-proportion="-10.416667" vertical-offset="560" max-vertical-offset="1185">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="oauthcallback.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/oauthcallback.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="7" selection-start="125" selection-end="125" vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="225">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="9" selection-start="553" selection-end="553" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="auth.service.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/auth/auth.service.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="0" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2280">
               <folding />
             </state>
           </provider>
@@ -118,6 +136,8 @@
         <option value="$PROJECT_DIR$/app/scripts/auth/auth.service.js" />
         <option value="$PROJECT_DIR$/app/scripts/app.js" />
         <option value="$PROJECT_DIR$/app/scripts/geo-service.js" />
+        <option value="$PROJECT_DIR$/config.xml" />
+        <option value="$PROJECT_DIR$/app/oauthCallback.html" />
         <option value="$PROJECT_DIR$/app/scripts/controllers.js" />
       </list>
     </option>
@@ -191,38 +211,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ionic-evtrs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ionic-evtrs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ionic-evtrs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ionic-evtrs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -234,7 +222,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="SearchEverywhereHistory" value="app&#10;index&#10;decor&#10;inde&#10;grunt" />
+    <property name="SearchEverywhereHistory" value="geoser&#10;app&#10;index&#10;decor&#10;inde&#10;grunt" />
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
   </component>
@@ -331,12 +319,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1920" height="1054" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26923078" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2767094" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17518637" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17518637" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20074548" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -381,13 +369,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/templates/tab-detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="210">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/tabs.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="12" selection-start="512" selection-end="512" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="360">
@@ -429,7 +410,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="46" selection-start="1745" selection-end="1745" vertical-scroll-proportion="0.0" vertical-offset="690" max-vertical-offset="1065" />
+        <state line="46" column="46" selection-start="1745" selection-end="1745" vertical-scroll-proportion="0.0" vertical-offset="690" max-vertical-offset="1065">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/article-resource.js">
@@ -443,7 +426,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="24" selection-start="89" selection-end="89" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="225">
           <folding>
-            <marker date="1417800129000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: &quot;development&quot;...}" />
+            <marker date="1417887755000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: &quot;development&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -505,13 +488,6 @@
         <state line="20" column="0" selection-start="1654" selection-end="1654" vertical-scroll-proportion="0.53859967" vertical-offset="0" max-vertical-offset="557" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="503" selection-end="503" vertical-scroll-proportion="0.30252102" vertical-offset="0" max-vertical-offset="595">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/platforms/android/ant-build/AndroidManifest.xml.d">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595" />
@@ -540,11 +516,6 @@
     <entry file="file://$PROJECT_DIR$/platforms/android/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="73" selection-start="2312" selection-end="2312" vertical-scroll-proportion="0.5813953" vertical-offset="0" max-vertical-offset="645" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="36" selection-start="2062" selection-end="2062" vertical-scroll-proportion="1.4013841" vertical-offset="0" max-vertical-offset="1125" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/lib/textAngular/src/textAngular.js">
@@ -588,13 +559,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/auth/auth.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="41" selection-start="3586" selection-end="3586" vertical-scroll-proportion="2.8649068" vertical-offset="285" max-vertical-offset="2280">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/auth/user.service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="17" selection-start="255" selection-end="255" vertical-scroll-proportion="0.23291926" vertical-offset="0" max-vertical-offset="644">
@@ -613,7 +577,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="0" selection-start="65" selection-end="65" vertical-scroll-proportion="0.11645963" vertical-offset="0" max-vertical-offset="644">
           <folding>
-            <marker date="1417800129000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: &quot;development&quot;...}" />
+            <marker date="1417887755000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: &quot;development&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -639,20 +603,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/tab-detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="187" selection-end="187" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="210">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/tabs.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="12" selection-start="512" selection-end="512" vertical-scroll-proportion="-8.125" vertical-offset="0" max-vertical-offset="360">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/lib/angular/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1095">
@@ -670,23 +620,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/geo-service.js">
+    <entry file="file://$PROJECT_DIR$/app/scripts/camera-service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="49" selection-start="568" selection-end="583" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
+        <state line="8" column="35" selection-start="233" selection-end="233" vertical-scroll-proportion="0.18489985" vertical-offset="0" max-vertical-offset="649">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/camera-service.js">
+    <entry file="file://$PROJECT_DIR$/app/templates/tab-detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="12" selection-start="553" selection-end="570" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+        <state line="8" column="0" selection-start="187" selection-end="187" vertical-scroll-proportion="0.192" vertical-offset="0" max-vertical-offset="625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="36" selection-start="2091" selection-end="2091" vertical-scroll-proportion="-10.416667" vertical-offset="560" max-vertical-offset="1185">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/oauthcallback.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="7" selection-start="125" selection-end="125" vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="225">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="9" selection-start="553" selection-end="553" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/auth/auth.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="0" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2280">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/tabs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="12" selection-start="512" selection-end="512" vertical-scroll-proportion="-8.125" vertical-offset="0" max-vertical-offset="360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/geo-service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="38" selection-start="648" selection-end="648" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="0" selection-start="3150" selection-end="3150" vertical-scroll-proportion="0.55335367" vertical-offset="777" max-vertical-offset="1845">
+        <state line="133" column="25" selection-start="5976" selection-end="5976" vertical-scroll-proportion="0.8382126" vertical-offset="1451" max-vertical-offset="2850">
           <folding />
         </state>
       </provider>
