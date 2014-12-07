@@ -17,7 +17,7 @@ angular.module('IonicEvtrs')
         });
     })
 
-    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleService, CameraService, GeoService, $http, $window) {
+    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleService, CameraService, GeoService, $http, $window, $compile) {
         $scope.tinymceOptions = {
             theme: 'modern',
             plugins: [
@@ -40,10 +40,13 @@ angular.module('IonicEvtrs')
         $scope.insertPicture = function () {
             console.log('Getting camera');
             CameraService.getPicture().then(function (imageData) {
-
-                tinymce.activeEditor.focus();
-                                                                                                                  //todo get viewport dimensions
+                tinymce.activeEditor.focus();                                                                                                          //todo get viewport dimensions
                 tinymce.activeEditor.execCommand('insertHTML', false, '<img src="data:image/gif;base64,' + imageData + ' "width="300" height="500">');
+
+                var thumbnailContainer = angular.element(document.querySelector('.thumbnail-container'));
+                var thumbnail = angular.element('<div><img src="data:image/gif;base64,"' + imageData + '"width="50" height="40"></div>');
+                thumbnailContainer.append(thumbnail);
+                $compile(thumbnail);
             });
         }
 
@@ -58,7 +61,6 @@ angular.module('IonicEvtrs')
                     $scope.article.publDate = new Date();
                     GeoService.getCurrentPosition().then(function (finderyLocation) {
                         location = finderyLocation;
-
                     });
 
                     var oauthRedirectURL;
