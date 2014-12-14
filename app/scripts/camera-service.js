@@ -11,7 +11,7 @@ angular.module('IonicEvtrs')
                 saveToPhotoAlbum: false
             };
             navigator.camera.getPicture(function(result) {
-                // Do any magic you need
+               // TODO get picture orientation and size
                 q.resolve(result);
             }, function(err) {
                 q.reject(err);

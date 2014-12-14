@@ -4,25 +4,19 @@ angular.module('IonicEvtrs')
     .factory('GeoService', ['$q', function ($q) {
         return {
             getCurrentPosition: function () {
-                var q = $q.defer();
+                var deferred = $q.defer();
 
                 navigator.geolocation.getCurrentPosition(function (position) {
-                        //
-                        var finderyLocation = 'location[latitude]=' +
-                            position.coords.latitude +
-                            '&location[longitude]=' +
-                            position.coords.longitude;
-                        q.resolve(finderyLocation);
-
+                        deferred.resolve(position);
                     },
                     function (error) {
-                        q.reject(
+                        deferred.reject(
                             'code: ' + error.code +
                                 'message: ' + error.message
                         );
                     });
 
-                return q.promise;
+                return deferred.promise;
             }
         };
     }]);

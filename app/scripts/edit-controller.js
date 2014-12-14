@@ -1,7 +1,7 @@
 'use strict';
 angular.module('IonicEvtrs')
 
-    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleService, CameraService, GeoService, $http, $window, $compile) {
+    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleService, CameraService, GeoService, $http, $window, $compile, FinderyService, $q) {
         $scope.tinymceOptions = {
             theme: 'modern',
             plugins: [
@@ -24,92 +24,80 @@ angular.module('IonicEvtrs')
         $scope.initialize();
         $scope.insertPicture = function () {
 
-         CameraService.getPicture().then(function (imageData) {
-            var thumbnailContainer = angular.element(document.querySelector('.thumbnail-container'));
-            var thumbnail = angular.element('<div class="thumbnail"><img src="data:image/gif;base64,' + imageData + '"width="50" height="50"></div>');
-            thumbnailContainer.append(thumbnail);
-            $compile(thumbnail);
-            $scope.showThumbnails=true;
-          });
+            CameraService.getPicture().then(function (imageData) {
+
+                var thumbnailContainer = angular.element(document.querySelector('.thumbnail-container'));
+                //TODO move to directive
+                var thumbnail = angular.element('<div class="thumbnail"><img src="data:image/gif;base64,' + imageData + '"width="50" height="50"></div>');
+                thumbnailContainer.append(thumbnail);
+                $compile(thumbnail);
+                $scope.showThumbnails = true;
+            });
         }
 
         $scope.save = function (form) {
 
-            var client_id = 'p7A3-whdLB-YmDHlP6ubEOoEbtaA6pR3gA5ONjIIC';
-            var client_secret = '_-h8Y9bY8SxV8oW6lzBoCKuSu0RPsOK5bfomWthx9t6vzcw1_YMk5PWRdWeGnHih4r8';
-            var location;
-            $scope.submitted = true;
+            //todo Ionic form validation
             if (form.$valid) {
                 if ($scope.saveAction === 'Save') {
                     $scope.article.publDate = new Date();
-                    GeoService.getCurrentPosition().then(function (finderyLocation) {
-                        location = finderyLocation;
-                    });
 
-                    var oauthRedirectURL;
-                    var postAuthRequest = function (code) {
-                        $http.post('https://findery.com/oauth/access_token', {
-                            grant_type: 'authorization_code',
-                            code: code,
-                            client_id: client_id,
-                            client_secret: client_secret
-                        }).
-                            success(function (data) {
-                                $window.localStorage.finderyToken = data.access_token;
-                                postToFindery(data.access_token);
-                            }).
-                            error(function (err) {
-                                console.log(err);
-                            });
+                    var resolveFinderyToken = function () {
+
+                        if (!$window.localStorage.finderyToken) {
+  //                          var loginWindow = window.open(FinderyService.loginUrl, '_blank', 'location=yes');
+//                            loginWindow.addEventListener('loadstart', function (event) {
+//                                var url = event.url;
+//                                if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
+//                                    loginWindow.close();
+//                                    var code = url.split("code=")[1];
+//                                    return FinderyService.postAuthRequest(code);
+//                                }
+//                            });
+                            //in browser testing
+                            var deferred = $q.defer();
+                            deferred.resolve('ezwQKwuGIxc-Z11PYWDzZJ4993ziVgNsP6zzY3-WHfmf8Ug41bitNmo6lqcy19xhhZs');
+                            return deferred.promise;
+
+                        } else {
+                            var deferred = $q.defer();
+                            deferred.resolve($window.localStorage.finderyToken);
+                            return deferred.promise;
+                        }
+
                     }
+                    var positionPromise = GeoService.getCurrentPosition();
+                    var tokenPromise = resolveFinderyToken();
 
-                    var postToFindery = function (access_token) {
+                    $q.all([positionPromise , tokenPromise]).then(function(result) {
+                        var accessToken;
+                        var position;
+                        angular.forEach(result, function(response) {
+                            if(response instanceof Geoposition) {
+                                position = FinderyService.formatLocation(response);
+                                alert('position: ' + position);
+                            } else {
+                                accessToken = response;
+                                alert('accessToken: ' + accessToken);
 
-                        $http.post('https://api.findery.com/v2/notes', {
-                            access_token: access_token,
-                            title: $scope.article.title,
-                            message: $scope.article.content,
-                            visibility: 'self',
-                            location: location
-                        }).
-                            success(function (data) {
-                                alert('findery post success');
-                            }).
-                            error(function (err) {
-                                console.log(err);
-                            });
-                    }
-
-
-                    if (!$window.localStorage.finderyToken) {
-
-                        var login_url = 'https://findery.com/oauth/authorize?client_id=' +
-                            client_id +
-                            '&response_type=code&redirect_url=' +
-                            oauthRedirectURL +
-                            'l&scope=notes contacts delete';
-                        var loginWindow = window.open(login_url, '_blank', 'location=yes');
-
-                        loginWindow.addEventListener('loadstart', function (event) {
-                            var url = event.url;
-                            if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
-                                loginWindow.close();
-                                var code = url.split("code=")[1];
-                                postAuthRequest(code);
                             }
+
                         });
+                        return tmp;
+                    }).then(function(tmpResult) {
+                            alert(tmpResult);
+     //                       return FinderyService.post(accessToken, $scope.article.title, $scope.article.content, position, 'self');
 
-
-                    } else {
-                        postToFindery($window.localStorage.finderyToken);
-                    }
-                    ArticleService.save($scope.article)
+                            //return ArticleService.save($scope.article);
+                        })
                         .then(function (data) {
-                            $scope.article = data;
-                            $scope.saveAction = 'Update';
+                            alert('post success');
+//                            $scope.article = data;
+//                            $scope.saveAction = 'Update';
                         }
                     );
                 }
+                //update
                 else {
                     $scope.article.modDate = new Date();
                     $scope.article.put();

@@ -3,7 +3,7 @@
 angular.module('IonicEvtrs')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $window, $q, ENV) {
     var currentUser = {};
-    if(localStorage.token) {
+    if($window.localStorage.token) {
       currentUser = User.get();
     }
 
