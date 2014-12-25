@@ -1,7 +1,7 @@
 'use strict';
 angular.module('IonicEvtrs')
 
-    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleService, CameraService, GeoService, $http, $window, $compile, FinderyService, $q) {
+    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleService, CameraService, GeoService, $http, $window, $compile, FinderyService, $q, $log) {
         $scope.tinymceOptions = {
             theme: 'modern',
             plugins: [
@@ -15,7 +15,7 @@ angular.module('IonicEvtrs')
 
         $scope.initialize = function () {
             $scope.article = {};
-            $scope.article.content = 'Init';
+            $scope.article.content = '';
             $scope.saveAction = 'Save';
             $scope.submitted = false;
             $scope.showThumbnails = false;
@@ -25,9 +25,8 @@ angular.module('IonicEvtrs')
         $scope.insertPicture = function () {
 
             CameraService.getPicture().then(function (imageData) {
-
-                var thumbnailContainer = angular.element(document.querySelector('.thumbnail-container'));
                 //TODO move to directive
+                var thumbnailContainer = angular.element(document.querySelector('.thumbnail-container'));
                 var thumbnail = angular.element('<div class="thumbnail"><img src="data:image/gif;base64,' + imageData + '"width="50" height="50"></div>');
                 thumbnailContainer.append(thumbnail);
                 $compile(thumbnail);
@@ -36,7 +35,6 @@ angular.module('IonicEvtrs')
         }
 
         $scope.save = function (form) {
-
             //todo Ionic form validation
             if (form.$valid) {
                 if ($scope.saveAction === 'Save') {
@@ -45,19 +43,19 @@ angular.module('IonicEvtrs')
                     var resolveFinderyToken = function () {
 
                         if (!$window.localStorage.finderyToken) {
-  //                          var loginWindow = window.open(FinderyService.loginUrl, '_blank', 'location=yes');
-//                            loginWindow.addEventListener('loadstart', function (event) {
-//                                var url = event.url;
-//                                if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
-//                                    loginWindow.close();
-//                                    var code = url.split("code=")[1];
-//                                    return FinderyService.postAuthRequest(code);
-//                                }
-//                            });
+                            var loginWindow = window.open(FinderyService.loginUrl, '_blank', 'location=yes');
+                            loginWindow.addEventListener('loadstart', function (event) {
+                                var url = event.url;
+                                if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
+                                    loginWindow.close();
+                                    var code = url.split("code=")[1];
+                                    return FinderyService.postAuthRequest(code);
+                                }
+                            });
                             //in browser testing
-                            var deferred = $q.defer();
-                            deferred.resolve('ezwQKwuGIxc-Z11PYWDzZJ4993ziVgNsP6zzY3-WHfmf8Ug41bitNmo6lqcy19xhhZs');
-                            return deferred.promise;
+//                            var deferred = $q.defer();
+//                            deferred.resolve('ezwQKwuGIxc-Z11PYWDzZJ4993ziVgNsP6zzY3-WHfmf8Ug41bitNmo6lqcy19xhhZs');
+//                            return deferred.promise;
 
                         } else {
                             var deferred = $q.defer();
@@ -68,34 +66,34 @@ angular.module('IonicEvtrs')
                     }
                     var positionPromise = GeoService.getCurrentPosition();
                     var tokenPromise = resolveFinderyToken();
+                    //TODO name (alias) promises
+                    $q.all([
+                            positionPromise ,
+                            tokenPromise
+                        ]).then(function (result) {
+                            var accessToken;
+                            var position;
+                            angular.forEach(result, function (response) {
+                                $log.debug(response);
+                                if (response.hasOwnProperty('coords')) {
+                                    position = response;
+                                } else {
+                                    accessToken = response;
+                                }
 
-                    $q.all([positionPromise , tokenPromise]).then(function(result) {
-                        var accessToken;
-                        var position;
-                        angular.forEach(result, function(response) {
-                            if(response instanceof Geoposition) {
-                                position = FinderyService.formatLocation(response);
-                                alert('position: ' + position);
-                            } else {
-                                accessToken = response;
-                                alert('accessToken: ' + accessToken);
-
-                            }
-
-                        });
-                        return tmp;
-                    }).then(function(tmpResult) {
-                            alert(tmpResult);
-     //                       return FinderyService.post(accessToken, $scope.article.title, $scope.article.content, position, 'self');
-
-                            //return ArticleService.save($scope.article);
+                            })
+                            return FinderyService.postNote(accessToken, $scope.article.title, $scope.article.content, position, 'self');
+                        })
+                        .then(function (tmpResult) {
+                            return ArticleService.save($scope.article);
                         })
                         .then(function (data) {
-                            alert('post success');
 //                            $scope.article = data;
 //                            $scope.saveAction = 'Update';
                         }
-                    );
+                    ).catch(function (error) {
+                            $log.error('error posting to findery: ' + error);
+                        });
                 }
                 //update
                 else {
