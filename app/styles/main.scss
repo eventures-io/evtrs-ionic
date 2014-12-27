@@ -22,13 +22,13 @@
 .thumbnail-container {
   height: 50px;
   width: 100%;
-  border : 1px solid gray;
+  border: 1px solid gray;
   margin-bottom: 10px;
   overflow: hidden;
 }
 
 .thumbnail {
-  float:left;
+  float: left;
   margin-right: 4px;
 }
 
@@ -44,9 +44,57 @@
   text-align: center;
   padding-top: 5px;
 
+}
 
+@font-face {
+  font-family: 'fontello';
+  src: url('../fonts/fontello.eot');
+  src: url('../fonts/fontello.eot?#iefix') format('embedded-opentype'), url('../fonts/fontello.woff') format('woff'), url('../fonts/fontello.ttf') format('truetype'), url('../fonts/fontello.svg#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.menu-override .item {
+  border: none;
+  background: transparent;
+}
+
+.menu-override .item-content {
+  background: transparent;
+}
+
+.menu-btn {
+  display: block;
+  width: 66px;
+  height: 66px;
+  position: relative;
+  text-align: center;
+  line-height: 66px;
+  border-radius: 50%;
+  border: 1px solid;
+  font-size: xx-large;
+  background-color: darkorange;
+}
+
+.menu-btn-login {
+  margin-left: 30px;
+}
+
+.menu-btn-search {
+  margin-left: 15px;
 
 }
 
+.menu-btn-post {
+  margin-left: 45px;
+}
 
+.menu-btn-list {
+  margin-left: 25px;
+}
+
+.side-menu-bg {
+
+  background-color: #404040;
+}
 

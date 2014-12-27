@@ -1,19 +1,19 @@
 'use strict';
 angular.module('IonicEvtrs')
 
-    .controller('ArticleCtrl', function ($scope, ArticleService) {
-        ArticleService.getRecent().then(function (data) {
+    .controller('ArticleCtrl', function ($scope, ArticleResource) {
+        ArticleResource.recent().then(function (data) {
             $scope.articles = data;
         });
     })
 
-    .controller('ArticleDetailCtrl', function ($scope, $stateParams, ArticleService) {
-        ArticleService.getById($stateParams.articleId).then(function (data) {
+    .controller('ArticleDetailCtrl', function ($scope, $stateParams, ArticleResource) {
+        ArticleResource.get($stateParams.articleId).then(function (data) {
             $scope.article = data;
         });
     })
 
-    .controller('AppCtrl', function($scope, $ionicModal, Auth) {
+    .controller('AppCtrl', function($scope, $ionicModal, Auth, $ionicSideMenuDelegate) {
         // Form data for the login modal
         $scope.user = {};
         $scope.errors = {};
@@ -54,7 +54,12 @@ angular.module('IonicEvtrs')
                     //$scope.modal.show();
 
                 });
-        }
+        };
+
+
+        $scope.toggleMenuLeft = function() {
+            $ionicSideMenuDelegate.toggleLeft();
+        };
 
 
     })

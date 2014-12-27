@@ -1,7 +1,7 @@
 'use strict';
 angular.module('IonicEvtrs')
 
-    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleService, CameraService, GeoService, $http, $window, $compile, FinderyService, $q, $log) {
+    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleResource, CameraService, GeoService, $http, $window, $compile, FinderyService, $q, $log) {
         $scope.tinymceOptions = {
             theme: 'modern',
             plugins: [
@@ -85,7 +85,7 @@ angular.module('IonicEvtrs')
                             return FinderyService.postNote(accessToken, $scope.article.title, $scope.article.content, position, 'self');
                         })
                         .then(function (tmpResult) {
-                            return ArticleService.save($scope.article);
+                            return ArticleResource.save($scope.article);
                         })
                         .then(function (data) {
 //                            $scope.article = data;
