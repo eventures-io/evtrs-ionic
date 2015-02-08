@@ -13,51 +13,53 @@ angular.module('IonicEvtrs')
         });
     })
 
-    .controller('AppCtrl', function($scope, $ionicModal, Auth, $ionicSideMenuDelegate) {
+    .controller('AppCtrl', function ($scope, $ionicModal, Auth, $ionicSideMenuDelegate, $log) {
+
+        $ionicModal.fromTemplateUrl('templates/login.html', {
+            scope: $scope
+        }).then(function(modal) {
+                $log.debug('controller instance created');
+                $scope.modal = modal;
+            });
+
         // Form data for the login modal
         $scope.user = {};
         $scope.errors = {};
         $scope.loginError = false;
 
-        // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('templates/login.html', {
-            scope: $scope
-        }).then(function(modal) {
-                $scope.modal = modal;
-            });
+        $scope.$on('REQUEST_AUTH', function () {
+                login();
+        });
 
         // Triggered in the login modal to close it
-        $scope.closeLogin = function() {
+        var closeLogin = function () {
             $scope.modal.hide();
-        },
+        }
 
-            // Open the login modal
-            $scope.login = function() {
-                $scope.modal.show();
-            };
+        // Open the login modal
+        var login = function () {
+            $scope.modal.show();
+        };
 
         // Perform the login action when the user submits the login form
-        $scope.doLogin = function() {
+        $scope.doLogin = function () {
 
             Auth.login({
                 email: $scope.user.email,
                 password: $scope.user.password
             })
                 .then(function () {
-                    // Logged in, redirect to home
-                    //TODO replay latest request if redirected to login from protected url
-                    // $location.path('/');
+                    $scope.errors = {};
+                    closeLogin();
                 })
                 .catch(function (err) {
                     $scope.errors.login = err.message;
                     $scope.loginError = true;
-                    //$scope.modal.show();
-
                 });
         };
 
 
-        $scope.toggleMenuLeft = function() {
+        $scope.toggleMenuLeft = function () {
             $ionicSideMenuDelegate.toggleLeft();
         };
 

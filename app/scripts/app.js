@@ -33,8 +33,7 @@ angular.module('IonicEvtrs', [
             .state('app', {
                 url: '/app',
                 abstract: true,
-                templateUrl: 'templates/menu.html',
-                controller: 'AppCtrl'
+                templateUrl: 'templates/menu.html'
             })
 
             .state('app.search', {
@@ -68,8 +67,10 @@ angular.module('IonicEvtrs', [
                     'menuContent': {
                         templateUrl: 'templates/article-edit.html',
                         controller: 'ArticleEditCtrl'
+
                     }
-                }
+                },
+                authenticate: true
             })
 
         // if none of the above states are matched, use this as the fallback
@@ -91,7 +92,7 @@ angular.module('IonicEvtrs', [
             // Intercept 401s and redirect you to login
             responseError: function (response) {
                 if (response.status === 401) {
-                  //  $location.path('/login');
+                 // $rootScope.$broadcast('REQUEST_AUTH');
                     // remove any stale tokens
                     $window.localStorage.token = undefined;
                     return $q.reject(response);
@@ -103,12 +104,17 @@ angular.module('IonicEvtrs', [
         };
     })
 
-    .run(function ($rootScope, $location, Auth) {
+    .run(function ($rootScope, $location, Auth, $window) {
+
+        //reset auth token on load
+        Auth.logout();
+
         // Redirect to login if route requires auth and you're not logged in
         $rootScope.$on('$stateChangeStart', function (event, next) {
             Auth.isLoggedInAsync(function (loggedIn) {
                 if (next.authenticate && !loggedIn) {
-                 // AppCtrl.login();
+                   $rootScope.$broadcast('REQUEST_AUTH');
+                    //event.preventDefault;
                 }
             });
         });

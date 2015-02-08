@@ -30,6 +30,7 @@ angular.module('IonicEvtrs')
                 var thumbnail = angular.element('<div class="thumbnail"><img src="data:image/gif;base64,' + imageData + '"width="50" height="50"></div>');
                 thumbnailContainer.append(thumbnail);
                 $compile(thumbnail);
+                $scope.article.image = imageData;
                 $scope.showThumbnails = true;
             });
         }
@@ -40,59 +41,13 @@ angular.module('IonicEvtrs')
                 if ($scope.saveAction === 'Save') {
                     $scope.article.publDate = new Date();
 
-                    var resolveFinderyToken = function () {
-
-                        if (!$window.localStorage.finderyToken) {
-                            var loginWindow = window.open(FinderyService.loginUrl, '_blank', 'location=yes');
-                            loginWindow.addEventListener('loadstart', function (event) {
-                                var url = event.url;
-                                if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
-                                    loginWindow.close();
-                                    var code = url.split("code=")[1];
-                                    return FinderyService.postAuthRequest(code);
-                                }
-                            });
-                            //in browser testing
-//                            var deferred = $q.defer();
-//                            deferred.resolve('ezwQKwuGIxc-Z11PYWDzZJ4993ziVgNsP6zzY3-WHfmf8Ug41bitNmo6lqcy19xhhZs');
-//                            return deferred.promise;
-
-                        } else {
-                            var deferred = $q.defer();
-                            deferred.resolve($window.localStorage.finderyToken);
-                            return deferred.promise;
-                        }
-
-                    }
-                    var positionPromise = GeoService.getCurrentPosition();
-                    var tokenPromise = resolveFinderyToken();
-                    //TODO name (alias) promises
-                    $q.all([
-                            positionPromise ,
-                            tokenPromise
-                        ]).then(function (result) {
-                            var accessToken;
-                            var position;
-                            angular.forEach(result, function (response) {
-                                $log.debug(response);
-                                if (response.hasOwnProperty('coords')) {
-                                    position = response;
-                                } else {
-                                    accessToken = response;
-                                }
-
-                            })
-                            return FinderyService.postNote(accessToken, $scope.article.title, $scope.article.content, position, 'self');
-                        })
-                        .then(function (tmpResult) {
-                            return ArticleResource.save($scope.article);
-                        })
+                    ArticleResource.save($scope.article)
                         .then(function (data) {
-//                            $scope.article = data;
-//                            $scope.saveAction = 'Update';
+                            $scope.article = data;
+                            $scope.saveAction = 'Update';
                         }
                     ).catch(function (error) {
-                            $log.error('error posting to findery: ' + error);
+                            $log.error('error posting: ' + error);
                         });
                 }
                 //update
@@ -103,6 +58,57 @@ angular.module('IonicEvtrs')
             }
         };
     })
+
+
+
+//
+//var resolveFinderyToken = function () {
+//
+//    if (!$window.localStorage.finderyToken) {
+//        var loginWindow = window.open(FinderyService.loginUrl, '_blank', 'location=yes');
+//        loginWindow.addEventListener('loadstart', function (event) {
+//            var url = event.url;
+//            if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
+//                loginWindow.close();
+//                var code = url.split("code=")[1];
+//                return FinderyService.postAuthRequest(code);
+//            }
+//        });
+//        //in browser testing
+////                            var deferred = $q.defer();
+////                            deferred.resolve('ezwQKwuGIxc-Z11PYWDzZJ4993ziVgNsP6zzY3-WHfmf8Ug41bitNmo6lqcy19xhhZs');
+////                            return deferred.promise;
+//
+//    } else {
+//        var deferred = $q.defer();
+//        deferred.resolve($window.localStorage.finderyToken);
+//        return deferred.promise;
+//    }
+//
+//}
+//var positionPromise = GeoService.getCurrentPosition();
+//var tokenPromise = resolveFinderyToken();
+////TODO name (alias) promises
+//$q.all([
+//        positionPromise ,
+//        tokenPromise
+//    ]).then(function (result) {
+//        var accessToken;
+//        var position;
+//        angular.forEach(result, function (response) {
+//            $log.debug(response);
+//            if (response.hasOwnProperty('coords')) {
+//                position = response;
+//            } else {
+//                accessToken = response;
+//            }
+//
+//        })
+//        return FinderyService.postNote(accessToken, $scope.article.title, $scope.article.content, position, 'self');
+//    })
+//    .then(function (tmpResult) {
+//        return ArticleResource.save($scope.article);
+//    })
 
 
 //                    // Trying to calculate oauthRedirectURL based on the current URL.
