@@ -47,17 +47,49 @@ angular.module('IonicEvtrs')
                             $scope.saveAction = 'Update';
                         }
                     ).catch(function (error) {
-                            $log.error('error posting: ' + error);
+                            alert('error posting: ' + JSON.stringify(error));
                         });
                 }
                 //update
                 else {
                     $scope.article.modDate = new Date();
-                    $scope.article.put();
+                    $scope.article.put().then(function(data) {
+                        $scope.article = data;
+                    }).catch(function (error) {
+                        alert('error posting: ' + JSON.stringify(error));
+                    });;
                 }
             }
         };
     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

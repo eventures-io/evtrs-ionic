@@ -4,5 +4,14 @@
     </ion-nav-buttons>
     <ion-content class="has-header">
         <h1>Search</h1>
+        <input type="text" id="query" name="query" ng-bind="query"/>
+
+        <ion-list>
+            <ion-item class="item-icon-right" ng-repeat="article in articles" type="item-text-wrap" href="#/app/article/{{article._id}}">
+                {{article.title}}
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+        </ion-list>
+
     </ion-content>
 </ion-view>
