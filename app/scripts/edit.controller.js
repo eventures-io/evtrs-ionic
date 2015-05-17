@@ -1,7 +1,8 @@
 'use strict';
 angular.module('IonicEvtrs')
 
-    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleResource, CameraService, GeoService, $http, $window, $compile, FinderyService, $q, $log) {
+    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleResource, CameraService, GeoService, $http, $window, $compile, $q, $log) {
+        $scope.spinner = {};
         $scope.tinymceOptions = {
             theme: 'modern',
             plugins: [
@@ -30,10 +31,10 @@ angular.module('IonicEvtrs')
                 var thumbnail = angular.element('<div class="thumbnail"><img src="data:image/gif;base64,' + imageData + '"width="50" height="50"></div>');
                 thumbnailContainer.append(thumbnail);
                 $compile(thumbnail);
-                $scope.article.image = imageData;
+                $scope.article.image = 'data:image/jpeg;base64,' + imageData ;
                 $scope.showThumbnails = true;
             });
-        }
+        };
 
         $scope.save = function (form) {
             //todo Ionic form validation
@@ -47,7 +48,7 @@ angular.module('IonicEvtrs')
                             $scope.saveAction = 'Update';
                         }
                     ).catch(function (error) {
-                            alert('error posting: ' + JSON.stringify(error));
+                            $log.error('error posting: ' + JSON.stringify(error));
                         });
                 }
                 //update
@@ -56,12 +57,23 @@ angular.module('IonicEvtrs')
                     $scope.article.put().then(function(data) {
                         $scope.article = data;
                     }).catch(function (error) {
-                        alert('error posting: ' + JSON.stringify(error));
-                    });;
+                            $log.error('error posting: ' + JSON.stringify(error));
+                    });
                 }
             }
         };
-    })
+
+        $scope.findMatchingTypes = function (type) {
+            $scope.spinner.show = true;
+            return ArticleResource.findMatchingTypes(type).then(function (response) {
+                $scope.spinner.show = false;
+                return response;
+            }, function(error) {
+                $scope.spinner.show = false;
+                $log.error('Error loading types for ' + type + ': ' + JSON.stringify(error));
+            });
+        };
+    });
 
 
 

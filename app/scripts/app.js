@@ -5,7 +5,8 @@ angular.module('IonicEvtrs', [
         'config',
         'restangular',
         'ui.tinymce',
-        'ngResource'
+        'ngResource',
+        'ui.bootstrap'
     ])
 
     .run(function ($ionicPlatform) {
@@ -71,9 +72,8 @@ angular.module('IonicEvtrs', [
                     }
                 },
                 authenticate: true
-            })
+            });
 
-        // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/list');
 
     })
@@ -104,7 +104,7 @@ angular.module('IonicEvtrs', [
         };
     })
 
-    .run(function ($rootScope, $location, Auth, $window) {
+    .run(function ($rootScope, $location, Auth) {
 
         //reset auth token on load
        // Auth.logout();

@@ -34,7 +34,7 @@ angular.module('IonicEvtrs')
         // Triggered in the login modal to close it
         var closeLogin = function () {
             $scope.modal.hide();
-        }
+        };
 
         // Open the login modal
         var login = function () {
@@ -64,7 +64,7 @@ angular.module('IonicEvtrs')
         };
 
 
-    })
+    });
 
 
 

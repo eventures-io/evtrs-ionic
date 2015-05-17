@@ -6,9 +6,9 @@
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
   <ion-content has-header="true" padding="true">
-      <div class="article-content" ng-bind-html="article.content | HtmlFilter"></div>
       <div>
-          <img alt="Article Image" src="data:image/png;base64,{{article.image}}" class="article-image"/>
+          <img alt="Article Image" src="{{article.image}}" class="article-image"/>
       </div>
+      <div class="article-content" ng-bind-html="article.content | HtmlFilter"></div>
   </ion-content>
 </ion-view>

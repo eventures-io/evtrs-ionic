@@ -20,6 +20,11 @@ angular.module('IonicEvtrs')
 
             recent: function () {
                 return articles.customGETLIST('query/recent');
+            },
+
+            findMatchingTypes: function (type) {
+                var typeQuery = articles.all('types').all(type);
+                return  typeQuery.getList();
             }
 
         };

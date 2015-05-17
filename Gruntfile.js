@@ -27,10 +27,6 @@ module.exports = function (grunt) {
             android: 'platforms/android'
         },
 
-        // Environment Variables for Angular App
-        // This creates an Angular Module that can be injected via ENV
-        // Add any desired constants to the ENV objects below.
-        // https://github.com/diegonetto/generator-ionic#environment-specific-configuration
         ngconstant: {
             options: {
                 space: '  ',
@@ -42,7 +38,7 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: {
                         name: 'development',
-                        apiEndpoint: 'https://eventures-scroll.herokuapp.com'
+                        apiEndpoint: 'https://mean-post.herokuapp.com'
                     }
                 }
             },
@@ -50,7 +46,7 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: {
                         name: 'production',
-                        apiEndpoint: 'https://eventures-scroll.herokuapp.com'
+                        apiEndpoint: 'https://mean-post.herokuapp.com'
                     }
                 }
             }

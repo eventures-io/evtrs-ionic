@@ -9,18 +9,26 @@
         </div>
         <div class="thumbnail-container" ng-show="showThumbnails"></div>
         <form class="form" name="form" ng-submit="save(form)" novalidate>
-            <label class="control-label" for="title">Title</label>
-            <input type="text" class="input-title" id="title" name="title" ng-model="article.title" required/>
+
+            <div class="form-group">
+                <label class="control-label" for="title">Title</label>
+                <input type="text" class="input-title" id="title" name="title" ng-model="article.title" required/>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="type">Type</label>
+                <input type="text" class="input-title" id="type" name="type" ng-model="article.type"
+                       typeahead="type for type in findMatchingTypes($viewValue)"
+                       required>
+                <i ng-show="spinner.show" class="glyphicon glyphicon-refresh"></i>
+            </div>
 
             <div class="form-group">
                 <textarea ui-tinymce="tinymceOptions" ng-model="article.content"></textarea>
             </div>
             <div class="pull-right form-btns">
-                <button class="button button-stable" ng-click="initialize()" type="button">Reset</button>
+                <button class="button button-stable" ng-click="initialize()" type="button">Reset
+                </button>
                 <button class="button button-stable" type="submit">{{saveAction}}</button>
-
-            </div>
-
             </div>
         </form>
     </ion-content>
