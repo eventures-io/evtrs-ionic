@@ -34,8 +34,8 @@ $menu-bg-sec: #28a62b;
   display: inline-block;
   background: url(../images/camera.png) no-repeat;
   background-size: 45px;
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   cursor: pointer;
 
 }
@@ -120,10 +120,16 @@ $menu-bg-sec: #28a62b;
 
 }
 
+.list-view
+{
+  background-color: #e3e3e3 !important;
+}
+
 .article-content {
   border: 1px solid gray;
   margin: 0.5em;
   padding: 0.3em;
+  background: #ededed;
 }
 
 .article-image {

@@ -8,10 +8,10 @@ angular.module('IonicEvtrs')
             var options = {
                 destinationType: 0,
                 quality: 25,
-                saveToPhotoAlbum: false
+                saveToPhotoAlbum: false,
+                correctOrientation: true
             };
             navigator.camera.getPicture(function(result) {
-               // TODO get picture orientation and size
                 q.resolve(result);
             }, function(err) {
                 q.reject(err);
