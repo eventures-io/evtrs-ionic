@@ -2,6 +2,13 @@
 angular.module('IonicEvtrs')
 
     .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleResource, CameraService, GeoService, $http, $window, $compile, $q, $log) {
+        $scope.article = {
+            images: [],
+            content: ''
+        };
+        $scope.saveAction = 'Save';
+        $scope.submitted = false;
+        $scope.showThumbnails = false;
         $scope.spinner = {};
         $scope.tinymceOptions = {
             theme: 'modern',
@@ -14,26 +21,20 @@ angular.module('IonicEvtrs')
             height: 300
         };
 
-        $scope.initialize = function () {
-            $scope.article = {};
-            $scope.article.content = '';
-            $scope.saveAction = 'Save';
-            $scope.submitted = false;
-            $scope.showThumbnails = false;
-        };
 
-        $scope.initialize();
         $scope.insertPicture = function () {
-
-            CameraService.getPicture().then(function (imageData) {
-                //TODO move to directive
-                var thumbnailContainer = angular.element(document.querySelector('.thumbnail-container'));
-                var thumbnail = angular.element('<div class="thumbnail"><img src="data:image/gif;base64,' + imageData + '"width="50" height="50"></div>');
-                thumbnailContainer.append(thumbnail);
-                $compile(thumbnail);
-                $scope.article.image = 'data:image/jpeg;base64,' + imageData ;
-                $scope.showThumbnails = true;
-            });
+            var imageCount = $scope.article.images.length;
+            if (imageCount < 3) {
+                CameraService.getPicture().then(function (imageData) {
+                    //TODO move to directive
+                    var thumbnailContainer = angular.element(document.querySelector('.thumbnail-container'));
+                    var thumbnail = angular.element('<div class="thumbnail"><img src="data:image/gif;base64,' + imageData + '"width="50" height="50"></div>');
+                    thumbnailContainer.append(thumbnail);
+                    $compile(thumbnail);
+                    $scope.article.images[imageCount] = 'data:image/jpeg;base64,' + imageData;
+                    $scope.showThumbnails = true;
+                });
+            }
         };
 
         $scope.save = function (form) {
@@ -54,11 +55,11 @@ angular.module('IonicEvtrs')
                 //update
                 else {
                     $scope.article.modDate = new Date();
-                    $scope.article.put().then(function(data) {
+                    $scope.article.put().then(function (data) {
                         $scope.article = data;
                     }).catch(function (error) {
                             $log.error('error posting: ' + JSON.stringify(error));
-                    });
+                        });
                 }
             }
         };
@@ -68,41 +69,12 @@ angular.module('IonicEvtrs')
             return ArticleResource.findMatchingTypes(type).then(function (response) {
                 $scope.spinner.show = false;
                 return response;
-            }, function(error) {
+            }, function (error) {
                 $scope.spinner.show = false;
                 $log.error('Error loading types for ' + type + ': ' + JSON.stringify(error));
             });
         };
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //
