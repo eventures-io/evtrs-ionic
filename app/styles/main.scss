@@ -80,6 +80,10 @@ $menu-bg-sec: #28a62b;
   background: transparent;
 }
 
+.menu-override .item-content.activated {
+  background: transparent !important;
+}
+
 .menu-override .item-content {
   background: transparent;
 }
@@ -139,3 +143,4 @@ $menu-bg-sec: #28a62b;
   //max-height: 100%;
 
 }
+

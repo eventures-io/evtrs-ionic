@@ -1,7 +1,7 @@
 'use strict';
 angular.module('IonicEvtrs')
 
-    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleResource, CameraService, GeoService, $http, $window, $compile, $q, $log) {
+    .controller('ArticleEditCtrl', function ($scope, $stateParams, ArticleResource, CameraService, GeoService, $http, $window, $compile, $q, $log, $ionicScrollDelegate) {
         $scope.article = {
             images: [],
             content: ''
@@ -33,6 +33,7 @@ angular.module('IonicEvtrs')
                     $compile(thumbnail);
                     $scope.article.images[imageCount] = 'data:image/jpeg;base64,' + imageData;
                     $scope.showThumbnails = true;
+                    $ionicScrollDelegate.resize();
                 });
             }
         };
@@ -75,69 +76,3 @@ angular.module('IonicEvtrs')
             });
         };
     });
-
-
-//
-//var resolveFinderyToken = function () {
-//
-//    if (!$window.localStorage.finderyToken) {
-//        var loginWindow = window.open(FinderyService.loginUrl, '_blank', 'location=yes');
-//        loginWindow.addEventListener('loadstart', function (event) {
-//            var url = event.url;
-//            if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
-//                loginWindow.close();
-//                var code = url.split("code=")[1];
-//                return FinderyService.postAuthRequest(code);
-//            }
-//        });
-//        //in browser testing
-////                            var deferred = $q.defer();
-////                            deferred.resolve('ezwQKwuGIxc-Z11PYWDzZJ4993ziVgNsP6zzY3-WHfmf8Ug41bitNmo6lqcy19xhhZs');
-////                            return deferred.promise;
-//
-//    } else {
-//        var deferred = $q.defer();
-//        deferred.resolve($window.localStorage.finderyToken);
-//        return deferred.promise;
-//    }
-//
-//}
-//var positionPromise = GeoService.getCurrentPosition();
-//var tokenPromise = resolveFinderyToken();
-////TODO name (alias) promises
-//$q.all([
-//        positionPromise ,
-//        tokenPromise
-//    ]).then(function (result) {
-//        var accessToken;
-//        var position;
-//        angular.forEach(result, function (response) {
-//            $log.debug(response);
-//            if (response.hasOwnProperty('coords')) {
-//                position = response;
-//            } else {
-//                accessToken = response;
-//            }
-//
-//        })
-//        return FinderyService.postNote(accessToken, $scope.article.title, $scope.article.content, position, 'self');
-//    })
-//    .then(function (tmpResult) {
-//        return ArticleResource.save($scope.article);
-//    })
-
-
-//                    // Trying to calculate oauthRedirectURL based on the current URL.
-//                    var index = document.location.href.indexOf('index.html');
-//                    alert('current url : ' + document.location.href);
-//                    if (index > 0) {
-//                        oauthRedirectURL = document.location.href.substring(0, index) + 'oauthcallback.html';
-//                    } else {
-//                        return alert("Can't reliably infer the OAuth redirect URI. Please specify it explicitly in openFB.init()");
-//                    }
-
-
-//            tinymce.activeEditor.focus();
-//            tinymce.activeEditor.execCommand('insertHTML', false, '<img src="data:image/gif;base64,' + imageData + ' "width="300" height="500">');
-
-//        var imageData = 'R0lGODlhEAAOALMAAOazToeHh0tLS/7LZv/0jvb29t/f3//Ub//ge8WSLf/rhf/3kdbW1mxsbP//mf///yH5BAAAAAAALAAAAAAQAA4AAARe8L1Ekyky67QZ1hLnjM5UUde0ECwLJoExKcppV0aCcGCmTIHEIUEqjgaORCMxIC6e0CcguWw6aFjsVMkkIr7g77ZKPJjPZqIyd7sJAgVGoEGv2xsBxqNgYPj/gAwXEQA7';
