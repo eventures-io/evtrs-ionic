@@ -1,14 +1,30 @@
 @import "compass";
 
-$font-size-base:                  16px !default;
-$font-size-large:                 20px !default;
-$font-size-small:                 14px !default;
-
+/* Colors */
 $menu-bg-prim: #2aff42;
 $menu-bg-sec: #28a62b;
 
+/* Ionic overrides */
+$font-size-base: 20px !default;
+$font-size-large: 28px !default;
+$font-size-small: 18px !default;
+
+.spinner svg {
+  width: 78px;
+  height: 78px;
+  stroke: $menu-bg-prim;
+  fill: $menu-bg-sec;
+}
+
+input {
+  font-size: x-large !important;
+}
 
 /* Forms */
+
+textarea {
+  height: 60px !important;
+}
 
 .input-title {
   border: 1px solid gray;
@@ -18,8 +34,8 @@ $menu-bg-sec: #28a62b;
 }
 
 .control-label {
-  font-weight: bold;
-  font-size: large;
+  color: gray;
+  font-size: x-large;
 }
 
 .form-btns {
@@ -118,14 +134,12 @@ $menu-bg-sec: #28a62b;
   margin-left: 1px;
 }
 
-
 .side-menu-bg {
   @include background-image(linear-gradient($menu-bg-prim, $menu-bg-sec));
 
 }
 
-.list-view
-{
+.list-view {
   background-color: #e3e3e3 !important;
 }
 

@@ -5,8 +5,7 @@ angular.module('IonicEvtrs', [
         'config',
         'restangular',
         'ui.tinymce',
-        'ngResource',
-        'ui.bootstrap'
+        'ngResource'
     ])
 
     .run(function ($ionicPlatform) {
@@ -82,15 +81,22 @@ angular.module('IonicEvtrs', [
         return {
             // Add authorization token to headers
             request: function (config) {
+                config.timeout = 20000;
+                $rootScope.$broadcast('loading:show');
                 config.headers = config.headers || {};
                 if ($window.localStorage.token) {
                     config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
                 }
                 return config;
             },
+            response: function (config) {
+                $rootScope.$broadcast('loading:hide');
+                return config;
+            },
 
             // Intercept 401s and redirect you to login
             responseError: function (response) {
+                $rootScope.$broadcast('loading:hide');
                 if (response.status === 401) {
                  // $rootScope.$broadcast('REQUEST_AUTH');
                     // remove any stale tokens
@@ -104,10 +110,14 @@ angular.module('IonicEvtrs', [
         };
     })
 
-    .run(function ($rootScope, $location, Auth) {
+    .run(function ($rootScope, $location, Auth, $ionicLoading) {
+        $rootScope.$on('loading:show', function() {
+            $ionicLoading.show({template: "<ion-spinner></ion-spinner>"})
+        });
 
-        //reset auth token on load
-       // Auth.logout();
+        $rootScope.$on('loading:hide', function() {
+            $ionicLoading.hide()
+        });
 
         // Redirect to login if route requires auth and you're not logged in
         $rootScope.$on('$stateChangeStart', function (event, next) {
